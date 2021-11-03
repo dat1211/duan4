@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main th:object="${item}" class="poly-item-detail">
+		<div class="row">
+		<div class="product">
+			<div class="col-md-6">
+				<div class="panel-body text-center">
+					<img th:src="@{|/assets/images/*{image}|}">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel-body">
+					<h1 th:text="*{name}"></h1>
+						<div>
+						<h3 th:text="*{price}"></h3>
+						</div>
+						
+						<li th:text="*{createDate}"></li>
+						<li th:text="*{category.name}"></li>
+					
+				</div>
+				
+				<div class="panel-footer text-right">
+					<button class="btn btn-success">
+						<a th:href="@{/cart/view}"> <i
+							class="glyphicon glyphicon-shopping-cart"></i>
+						</a>
+
+					</button>
+				</div>
+			</div>
+		</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Hàng cùng loại</div>
+				<div class="panel-body">
+					<ul>
+						<li th:each="p:*{category.products}"><a
+							th:href="@{|/product/detail/${p.id}|}" th:text="${p.name}"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>
